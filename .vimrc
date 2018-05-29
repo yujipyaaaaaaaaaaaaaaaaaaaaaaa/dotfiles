@@ -41,6 +41,19 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug '907th/vim-auto-save'
 let g:auto_save = 1
 
+" pythonの補間プラグイン
+Plug 'davidhalter/jedi-vim'
+
+" pythonのスタイルチェック
+Plug 'andviro/flake8-vim'
+
+" pythonのインデント違反をなくす奴
+Plug 'hynek/vim-python-pep8-indent'
+
+
+" quickrun
+Plug 'thinca/vim-quickrun'
+
 " 余談: neocompleteは合わなかった。ctrl+pで補完するのが便利
 
 call plug#end()
@@ -223,7 +236,13 @@ endif
 imap { {}<LEFT>
 imap [ []<LEFT>
 imap ( ()<LEFT>
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""
+
+" jedivim用設定
+let g:jedi#auto_initialization = 1
+let g:jedi#rename_command = "<leader>R"
+let g:jedi#popup_on_dot = 1
+autocmd FileType python let b:did_ftplugin = 1
 
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
 filetype on
