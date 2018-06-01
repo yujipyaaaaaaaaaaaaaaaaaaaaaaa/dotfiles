@@ -41,14 +41,27 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug '907th/vim-auto-save'
 let g:auto_save = 1
 
+
+"""python"""
 " pythonの補間プラグイン
 Plug 'davidhalter/jedi-vim'
-
 " pythonのスタイルチェック
 Plug 'andviro/flake8-vim'
-
 " pythonのインデント違反をなくす奴
 Plug 'hynek/vim-python-pep8-indent'
+
+"""c++"""
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/vimproc.vim',{
+            \ 'build' : {
+            \ 'windows' : 'make -f make_mingw32.mak',
+            \ 'cygwin' : 'make -f make_cygwin.mak',
+            \ 'mac' : 'make -f make_mac.mak',
+            \ 'unix' : 'make -f make_unix.mak',
+            \ },
+            \ }
+Plug 'justmao945/vim-clang'
+Plug 'Shougo/neoinclude.vim'
 
 
 " quickrun
@@ -233,9 +246,9 @@ endif
 """"""""""""""""""""""""""""""
 " 自動的に閉じ括弧を入力
 """"""""""""""""""""""""""""""
-imap { {}<LEFT>
-imap [ []<LEFT>
-imap ( ()<LEFT>
+" imap { {}<LEFT>
+" imap [ []<LEFT>
+" imap ( ()<LEFT>
 """""""""""""""""""""""""""""
 
 " jedivim用設定
@@ -244,5 +257,76 @@ let g:jedi#rename_command = "<leader>R"
 let g:jedi#popup_on_dot = 1
 autocmd FileType python let b:did_ftplugin = 1
 
+
+" cudaのファイルをc++にする
+autocmd BufNewFile,BufRead *.cu setf cpp
+
+"""""""""""""""""""""""""""
+" vim-clang周りの設定
+"""""""""""""""""""""""""""
+" 'Shougo/neocomplete.vim' {{{
+let g:neocomplete#enable_at_startup = 1
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {} 
+endif
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#force_omni_input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+" }}}
+"
+" 'justmao945/vim-clang' {{{
+
+" disable auto completion for vim-clang
+let g:clang_auto = 0
+" default 'longest' can not work with neocomplete
+let g:clang_c_completeopt   = 'menuone'
+let g:clang_cpp_completeopt = 'menuone'
+
+function! s:get_latest_clang(search_path)
+    let l:filelist = split(globpath(a:search_path, 'clang-*'), '\n')
+    let l:clang_exec_list = []
+    for l:file in l:filelist
+        if l:file =~ '^.*clang-\d\.\d$'
+            call add(l:clang_exec_list, l:file)
+        endif
+    endfor
+    if len(l:clang_exec_list)
+        return reverse(l:clang_exec_list)[0]
+    else
+        return 'clang'
+    endif
+endfunction
+
+function! s:get_latest_clang_format(search_path)
+    let l:filelist = split(globpath(a:search_path, 'clang-format-*'), '\n')
+    let l:clang_exec_list = []
+    for l:file in l:filelist
+        if l:file =~ '^.*clang-format-\d\.\d$'
+            call add(l:clang_exec_list, l:file)
+        endif
+    endfor
+    if len(l:clang_exec_list)
+        return reverse(l:clang_exec_list)[0]
+    else
+        return 'clang-format'
+    endif
+endfunction
+
+let g:clang_exec = s:get_latest_clang('/usr/bin')
+let g:clang_format_exec = s:get_latest_clang_format('/usr/bin')
+
+let g:clang_c_options = '-std=c14'
+let g:clang_cpp_options = '-std=c++14 -stdlib=libc++'
+" }}}
+
+
+""""""""""""""""""""""""""""""
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
+""""""""""""""""""""""""""""""
 filetype on
+
+
