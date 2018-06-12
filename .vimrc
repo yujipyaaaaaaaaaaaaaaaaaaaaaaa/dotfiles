@@ -149,6 +149,8 @@ set formatoptions=q
 set formatoptions=q
 " クラッシュ防止（http://superuser.com/questions/810622/vim-crashes-freezes-on-specific-files-mac-osx-mavericks）
 set synmaxcol=200
+" clipboard
+set clipboard=unnamed,autoselect
 """"""""""""""""""""""""""""""
 
 " grep検索の実行後にQuickFix Listを表示する
