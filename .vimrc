@@ -63,11 +63,8 @@ Plug 'Shougo/vimproc.vim',{
 Plug 'justmao945/vim-clang'
 Plug 'Shougo/neoinclude.vim'
 
-
 " quickrun
 Plug 'thinca/vim-quickrun'
-
-" 余談: neocompleteは合わなかった。ctrl+pで補完するのが便利
 
 call plug#end()
 
@@ -150,7 +147,22 @@ set formatoptions=q
 " クラッシュ防止（http://superuser.com/questions/810622/vim-crashes-freezes-on-specific-files-mac-osx-mavericks）
 set synmaxcol=200
 " clipboard
+" "+yと打つとclipboardにヤンク内容が入る
 set clipboard=unnamed,autoselect
+
+""""""""""""""""""""""""""""""
+""" map関連
+" shift-hで先頭に移動
+noremap <S-h> ^
+" shift-lで末尾に移動
+noremap <S-l> $
+" shift-jでページダウンに移動
+noremap <S-j> }
+" shift-kでページアップに移動
+noremap <S-k> {
+" Ctrl-cでクリップボードにコピー
+noremap <C-c> "+y
+
 """"""""""""""""""""""""""""""
 
 " grep検索の実行後にQuickFix Listを表示する
