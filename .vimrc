@@ -63,6 +63,13 @@ Plug 'Shougo/vimproc.vim',{
 Plug 'justmao945/vim-clang'
 Plug 'Shougo/neoinclude.vim'
 
+
+"""markdown"""
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+Plug 'tpope/vim-markdown'
+
+
 " quickrun
 Plug 'thinca/vim-quickrun'
 
