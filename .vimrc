@@ -170,6 +170,12 @@ noremap <S-k> {
 " Ctrl-cでクリップボードにコピー
 noremap <C-c> "+y
 
+" gtnでtabnew ついでにNERDTreeを
+" gTとgtでタブ移動(デフォルト)
+noremap gtn :tabnew+NERDTreeFind<CR>
+" gnでNERDTreeを起動する
+noremap gn :NERDTreeFind<CR>
+
 """"""""""""""""""""""""""""""
 
 " grep検索の実行後にQuickFix Listを表示する
