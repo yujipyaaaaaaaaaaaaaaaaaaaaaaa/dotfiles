@@ -176,6 +176,13 @@ noremap gtn :tabnew+NERDTreeFind<CR>
 " gnでNERDTreeを起動する
 noremap gn :NERDTreeFind<CR>
 
+" 検索時のハイライトをESC2連で消す
+nnoremap <ESC><ESC> :noh<CR><ESC>
+
+" 水平タブにvimrcを開く
+noremap :vimrc <C-w>v :edit $MYVIMRC
+noremap :svimrc :source $MYVIMRC
+
 """"""""""""""""""""""""""""""
 
 " grep検索の実行後にQuickFix Listを表示する
@@ -295,7 +302,7 @@ autocmd BufNewFile,BufRead *.cu setf cpp
 let g:neocomplete#enable_at_startup = 1
 
 if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {} 
+  let g:neocomplete#force_omni_input_patterns = {}
 endif
 let g:neocomplete#force_overwrite_completefunc = 1
 let g:neocomplete#force_omni_input_patterns.c =
