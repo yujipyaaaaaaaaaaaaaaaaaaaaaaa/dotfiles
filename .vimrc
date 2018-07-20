@@ -172,7 +172,7 @@ noremap <C-c> "+y
 
 " gtnでtabnew ついでにNERDTreeを
 " gTとgtでタブ移動(デフォルト)
-noremap gtn :tabnew+NERDTreeFind<CR>
+noremap gtn :tabnew+NERDTree<CR>
 " gnでNERDTreeを起動する
 noremap gn :NERDTreeFind<CR>
 
