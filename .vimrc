@@ -174,14 +174,14 @@ noremap <C-c> "+y
 " gTとgtでタブ移動(デフォルト)
 noremap gtn :tabnew+NERDTree<CR>
 " gnでNERDTreeを起動する
-noremap gn :NERDTreeFind<CR>
+noremap gn :NERDTree<CR>
 
 " 検索時のハイライトをESC2連で消す
 nnoremap <ESC><ESC> :noh<CR><ESC>
 
 " 水平タブにvimrcを開く
-noremap :vimrc <C-w>v :edit $MYVIMRC
-noremap :svimrc :source $MYVIMRC
+noremap :vimrc :edit ~/dotfiles/.vimrc
+noremap :svimrc :source ~/dotfiles/.vimrc
 
 """"""""""""""""""""""""""""""
 
