@@ -121,8 +121,8 @@ if ! shopt -oq posix; then
 fi
 
 export EDITOR=vim
+
 # direnv
-source /opt/ros/kinetic/setup.bash
 eval "$(direnv hook bash)"
 show_virtual_env() {
   if [ -n "$VIRTUAL_ENV" ]; then
