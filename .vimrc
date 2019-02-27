@@ -77,6 +77,17 @@ call plug#end()
 
 " filetypeの検出を有効化する => vim-plugでは不要
 " filetype plugin indent on
+"
+
+""" review """
+Plug 'tokorom/vim-review'
+let g:vim_review#include_filetypes = ['c++']
+let g:vim_review#include_filetypes = ['cpp']
+
+
+""" 日本語入力補助 """
+Plug 'deton/jasegment.vim'
+
 """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
@@ -169,6 +180,10 @@ noremap <S-j> }
 noremap <S-k> {
 " Ctrl-cでクリップボードにコピー
 noremap <C-c> "+y
+
+" Ctrl-jでEscする
+noremap! <C-j> <ESC>
+noremap <C-j> <ESC>
 
 " gtnでtabnew ついでにNERDTreeを
 " gTとgtでタブ移動(デフォルト)
