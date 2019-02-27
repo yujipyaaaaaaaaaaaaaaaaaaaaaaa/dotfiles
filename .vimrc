@@ -76,8 +76,6 @@ Plug 'tpope/vim-markdown'
 " quickrun
 Plug 'thinca/vim-quickrun'
 
-call plug#end()
-
 " filetypeの検出を有効化する => vim-plugでは不要
 " filetype plugin indent on
 "
@@ -88,12 +86,14 @@ let g:vim_review#include_filetypes = ['c++']
 let g:vim_review#include_filetypes = ['cpp']
 
 
-" 日本語入力補助 """
+""" 日本語入力補助"""
 Plug 'deton/jasegment.vim'
 
-""" easy motion """
+"""easy motion"""
 Plug 'easymotion/vim-easymotion'
 map <Leader> <Plug>(easymotion-prefix)
+
+call plug#end()
 
 """""""""""""""""""""""""""
 
@@ -134,6 +134,7 @@ set hlsearch
 set background=dark
 " タブ入力を複数の空白入力に置き換える
 set expandtab
+autocmd FileType review setlocal noet
 " 検索ワードの最初の文字を入力した時点で検索を開始する
 set incsearch
 " 保存されていないファイルがあるときでも別のファイルを開けるようにする
