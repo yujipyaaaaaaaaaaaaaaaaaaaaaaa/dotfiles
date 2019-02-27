@@ -3,6 +3,9 @@
 " 一旦ファイルタイプ関連を無効化する => vim-plugでは不要
 " filetype off
 
+" leaderをSpaceにする
+let mapleader = "\<Space>"
+
 """"""""""""""""""""""""""""""
 " プラグインのセットアップ
 """"""""""""""""""""""""""""""
@@ -85,12 +88,16 @@ let g:vim_review#include_filetypes = ['c++']
 let g:vim_review#include_filetypes = ['cpp']
 
 
-""" 日本語入力補助 """
+" 日本語入力補助 """
 Plug 'deton/jasegment.vim'
 
-""""""""""""""""""""""""""""""
+""" easy motion """
+Plug 'easymotion/vim-easymotion'
+map <Leader> <Plug>(easymotion-prefix)
 
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""
 " 各種オプションの設定
 """"""""""""""""""""""""""""""
 " タグファイルの指定(でもタグジャンプは使ったことがない)
