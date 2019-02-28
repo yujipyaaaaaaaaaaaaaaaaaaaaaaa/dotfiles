@@ -169,6 +169,9 @@ noremap <S-j> }
 noremap <S-k> {
 " Ctrl-cでクリップボードにコピー
 noremap <C-c> "+y
+noremap <C-j> <ESC>
+noremap! <C-j> <ESC>
+
 
 " gtnでtabnew ついでにNERDTreeを
 " gTとgtでタブ移動(デフォルト)

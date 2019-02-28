@@ -137,8 +137,8 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"
 export DISPLAY=localhost:0.0
 
 # git settings
-source ~/git/contrib/completion/git-prompt.sh
-source ~/git/contrib/completion/git-completion.bash
+source git/contrib/completion/git-prompt.sh
+source git/contrib/completion/git-completion.bash
 GIT_PS1_SHOWDIRTYSTATE=true
 # export PS1='$(show_virtual_env)\[\033[32m\]\u@\h\[\033[00m\]:\[\033[36m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
 export PS1='$(show_virtual_env)\[\033[36m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
