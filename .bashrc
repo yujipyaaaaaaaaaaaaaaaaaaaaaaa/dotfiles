@@ -131,10 +131,9 @@ show_virtual_env() {
 }
 
 # PS1='$(show_virtual_env)'$PS1
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/lib"
 [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
 
-export DISPLAY=localhost:0.0
 
 # git settings
 source git/contrib/completion/git-prompt.sh
@@ -142,3 +141,14 @@ source git/contrib/completion/git-completion.bash
 GIT_PS1_SHOWDIRTYSTATE=true
 # export PS1='$(show_virtual_env)\[\033[32m\]\u@\h\[\033[00m\]:\[\033[36m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
 export PS1='$(show_virtual_env)\[\033[36m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$PATH:/usr/local/android-studio/bin"
+
+
+source /opt/ros/kinetic/setup.bash
+
+export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3.5/site-packages"
