@@ -19,6 +19,7 @@ Plug 'Shougo/neomru.vim'
 Plug 'scrooloose/nerdtree'
 " Gitを便利に使う
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Rails向けのコマンドを提供する
 " Plug 'tpope/vim-rails'
@@ -92,6 +93,8 @@ Plug 'deton/jasegment.vim'
 """easy motion"""
 Plug 'easymotion/vim-easymotion'
 map <Leader> <Plug>(easymotion-prefix)
+let g:EasyMotion_use_migemo = 1
+let g:EasyMotion_keys = 'asdfhjkl'
 
 call plug#end()
 
