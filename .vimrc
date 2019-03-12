@@ -430,6 +430,22 @@ let g:clang_c_options = '-std=c14'
 let g:clang_cpp_options = '-std=c++14 -stdlib=libc++'
 
 
+""" clang-formatを実行する
+""" pyの場所がわからない時は、$ dkpg -L clang-format
+""" をするとインストール先がわかる。パーミッション設定必要かも
+function! CPPCodeCleanup()
+  " echo "Cleanup cpp code"
+  let l:lines="all"
+  let g:clang_format_fallback_style = 'Google'
+  :pyf /usr/share/vim/addons/syntax/clang-format.py
+endfunction
+command! CPPCodeCleanup call CPPCodeCleanup()
+
+autocmd BufWrite *.{cpp} :CPPCodeCleanup
+autocmd BufWrite *.{hpp} :CPPCodeCleanup
+autocmd BufWrite *.{c} :CPPCodeCleanup
+autocmd BufWrite *.{h} :CPPCodeCleanup
+
 """"""""""""""""""""""""""""""
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
 """"""""""""""""""""""""""""""
