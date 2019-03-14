@@ -66,7 +66,10 @@ endif
 let g:deoplete#enable_at_startup = 1
 
 """c++"""
-" Plug 'Shougo/neocomplete.vim'
+Plug 'zchee/deoplete-clang'
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
+let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
+
 Plug 'Shougo/vimproc.vim',{
             \ 'build' : {
             \ 'windows' : 'make -f make_mingw32.mak',
@@ -335,7 +338,7 @@ autocmd BufNewFile,BufRead *.cu setf cpp
 """""""""""""""""""""""""""
 " vim-clang周りの設定
 """""""""""""""""""""""""""
-let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#enable_at_startup = 1
 
 " if !exists('g:neocomplete#force_omni_input_patterns')
 "   let g:neocomplete#force_omni_input_patterns = {}
@@ -389,12 +392,12 @@ let g:neocomplete#enable_at_startup = 1
 " let g:clang_exec = s:get_latest_clang('/usr/bin')
 " let g:clang_format_exec = s:get_latest_clang_format('/usr/bin')
 
-if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" if !exists('g:neocomplete#force_omni_input_patterns')
+"         let g:neocomplete#force_omni_input_patterns = {}
+" endif
+" let g:neocomplete#force_overwrite_completefunc = 1
+" let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+" let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 """}}}
 
 " 'justmao945/vim-clang' {{{
