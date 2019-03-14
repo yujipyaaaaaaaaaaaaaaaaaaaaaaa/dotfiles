@@ -19,6 +19,7 @@ Plug 'Shougo/neomru.vim'
 Plug 'scrooloose/nerdtree'
 " Gitを便利に使う
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Rails向けのコマンドを提供する
 " Plug 'tpope/vim-rails'
@@ -92,6 +93,8 @@ Plug 'deton/jasegment.vim'
 """easy motion"""
 Plug 'easymotion/vim-easymotion'
 map <Leader> <Plug>(easymotion-prefix)
+let g:EasyMotion_use_migemo = 1
+let g:EasyMotion_keys = 'asdfhjkl'
 
 call plug#end()
 
@@ -324,69 +327,139 @@ autocmd BufNewFile,BufRead *.cu setf cpp
 """""""""""""""""""""""""""
 " vim-clang周りの設定
 """""""""""""""""""""""""""
-" 'Shougo/neocomplete.vim' {{{
 let g:neocomplete#enable_at_startup = 1
 
+" if !exists('g:neocomplete#force_omni_input_patterns')
+"   let g:neocomplete#force_omni_input_patterns = {}
+" endif
+" let g:neocomplete#force_overwrite_completefunc = 1
+" let g:neocomplete#force_omni_input_patterns.c =
+"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+" let g:neocomplete#force_omni_input_patterns.cpp =
+"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+" 
+" " }}}
+" "
+" " 'justmao945/vim-clang' {{{
+" 
+" " disable auto completion for vim-clang
+" let g:clang_auto = 0
+" " default 'longest' can not work with neocomplete
+" let g:clang_c_completeopt   = 'menuone'
+" let g:clang_cpp_completeopt = 'menuone'
+" 
+" function! s:get_latest_clang(search_path)
+"     let l:filelist = split(globpath(a:search_path, 'clang-*'), '\n')
+"     let l:clang_exec_list = []
+"     for l:file in l:filelist
+"         if l:file =~ '^.*clang-\d\.\d$'
+"             call add(l:clang_exec_list, l:file)
+"         endif
+"     endfor
+"     if len(l:clang_exec_list)
+"         return reverse(l:clang_exec_list)[0]
+"     else
+"         return 'clang'
+"     endif
+" endfunction
+" 
+" function! s:get_latest_clang_format(search_path)
+"     let l:filelist = split(globpath(a:search_path, 'clang-format-*'), '\n')
+"     let l:clang_exec_list = []
+"     for l:file in l:filelist
+"         if l:file =~ '^.*clang-format-\d\.\d$'
+"             call add(l:clang_exec_list, l:file)
+"         endif
+"     endfor
+"     if len(l:clang_exec_list)
+"         return reverse(l:clang_exec_list)[0]
+"     else
+"         return 'clang-format'
+"     endif
+" endfunction
+" 
+" let g:clang_exec = s:get_latest_clang('/usr/bin')
+" let g:clang_format_exec = s:get_latest_clang_format('/usr/bin')
+
 if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
+        let g:neocomplete#force_omni_input_patterns = {}
 endif
 let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"""}}}
 
-" }}}
-"
 " 'justmao945/vim-clang' {{{
 
-" disable auto completion for vim-clang
+" disable auto completion for vim-clanG
 let g:clang_auto = 0
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+let g:clang_use_library = 1
+
 " default 'longest' can not work with neocomplete
 let g:clang_c_completeopt   = 'menuone'
 let g:clang_cpp_completeopt = 'menuone'
 
-function! s:get_latest_clang(search_path)
-    let l:filelist = split(globpath(a:search_path, 'clang-*'), '\n')
-    let l:clang_exec_list = []
-    for l:file in l:filelist
-        if l:file =~ '^.*clang-\d\.\d$'
-            call add(l:clang_exec_list, l:file)
-        endif
-    endfor
-    if len(l:clang_exec_list)
-        return reverse(l:clang_exec_list)[0]
-    else
-        return 'clang'
-    endif
-endfunction
+if executable('clang-6.0')
+    let g:clang_exec = 'clang-6.0'
+elseif executable('clang-3.9')
+    let g:clang_exec = 'clang-3.9'
+elseif executable('clang-3.8')
+    let g:clang_exec = 'clang-3.8'
+elseif executable('clang-3.7')
+    let g:clang_exec = 'clang-3.7'
+elseif executable('clang-3.6')
+    let g:clang_exec = 'clang-3.6'
+elseif executable('clang-3.5')
+    let g:clang_exec = 'clang-3.5'
+elseif executable('clang-3.4')
+    let g:clang_exec = 'clang-3.4'
+else
+    let g:clang_exec = 'clang'
+endif
 
-function! s:get_latest_clang_format(search_path)
-    let l:filelist = split(globpath(a:search_path, 'clang-format-*'), '\n')
-    let l:clang_exec_list = []
-    for l:file in l:filelist
-        if l:file =~ '^.*clang-format-\d\.\d$'
-            call add(l:clang_exec_list, l:file)
-        endif
-    endfor
-    if len(l:clang_exec_list)
-        return reverse(l:clang_exec_list)[0]
-    else
-        return 'clang-format'
-    endif
-endfunction
-
-let g:clang_exec = s:get_latest_clang('/usr/bin')
-let g:clang_format_exec = s:get_latest_clang_format('/usr/bin')
+if executable('clang-format-6.0')
+    let g:clang_format_exec = 'clang-format-6.0'
+elseif executable('clang-format-3.9')
+    let g:clang_format_exec = 'clang-format-3.9'
+elseif executable('clang-format-3.8')
+  let g:clang_format_exec = 'clang-format-3.8'
+elseif executable('clang-format-3.7')
+  let g:clang_format_exec = 'clang-format-3.7'
+elseif executable('clang-format-3.6')
+    let g:clang_format_exec = 'clang-format-3.6'
+elseif executable('clang-format-3.5')
+    let g:clang_format_exec = 'clang-format-3.5'
+elseif executable('clang-format-3.4')
+    let g:clang_format_exec = 'clang-format-3.4'
+else
+    let g:clang_format_exec = 'clang-format'
+endif
 
 let g:clang_c_options = '-std=c14'
-let g:clang_cpp_options = '-std=c++14 -stdlib=libc++'
-" }}}
+"let g:clang_cpp_options = '-std=c++14 -stdlib=libc++'
+let g:clang_cpp_options = '-std=c++14'
 
+
+""" clang-formatを実行する
+""" pyの場所がわからない時は、$ dkpg -L clang-format
+""" をするとインストール先がわかる。パーミッション設定必要かも
+function! CPPCodeCleanup()
+  " echo "Cleanup cpp code"
+  let l:lines="all"
+  let g:clang_format_fallback_style = 'Google'
+  :pyf /usr/share/vim/addons/syntax/clang-format.py
+endfunction
+command! CPPCodeCleanup call CPPCodeCleanup()
+
+autocmd BufWrite *.{cpp} :CPPCodeCleanup
+autocmd BufWrite *.{hpp} :CPPCodeCleanup
+autocmd BufWrite *.{c} :CPPCodeCleanup
+autocmd BufWrite *.{h} :CPPCodeCleanup
 
 """"""""""""""""""""""""""""""
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
 """"""""""""""""""""""""""""""
 filetype on
-
 
