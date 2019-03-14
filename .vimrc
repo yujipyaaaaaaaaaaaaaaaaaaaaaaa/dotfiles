@@ -54,8 +54,19 @@ Plug 'andviro/flake8-vim'
 " pythonのインデント違反をなくす奴
 Plug 'hynek/vim-python-pep8-indent'
 
+
+""" 入力補完
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
 """c++"""
-Plug 'Shougo/neocomplete.vim'
+" Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc.vim',{
             \ 'build' : {
             \ 'windows' : 'make -f make_mingw32.mak',
