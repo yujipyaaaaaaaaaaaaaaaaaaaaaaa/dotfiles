@@ -464,7 +464,7 @@ function! CPPCodeCleanup()
   " echo "Cleanup cpp code"
   let l:lines="all"
   let g:clang_format_fallback_style = 'Google'
-  :pyf /usr/share/vim/addons/syntax/clang-format.py
+  :pyf /data/data/com.termux/files/usr/share/clang/clang-format.py
 endfunction
 command! CPPCodeCleanup call CPPCodeCleanup()
 
