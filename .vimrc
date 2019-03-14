@@ -401,7 +401,9 @@ let g:clang_use_library = 1
 let g:clang_c_completeopt   = 'menuone'
 let g:clang_cpp_completeopt = 'menuone'
 
-if executable('clang-6.0')
+if executable('clang-7.0.1')
+    let g:clang_exec = 'clang-7.0.1'
+elseif executable('clang-6.0')
     let g:clang_exec = 'clang-6.0'
 elseif executable('clang-3.9')
     let g:clang_exec = 'clang-3.9'
@@ -419,7 +421,9 @@ else
     let g:clang_exec = 'clang'
 endif
 
-if executable('clang-format-6.0')
+if executable('clang-format-7.0.1')
+    let g:clang_format_exec = 'clang-format-7.0.1'
+elseif executable('clang-format-6.0')
     let g:clang_format_exec = 'clang-format-6.0'
 elseif executable('clang-format-3.9')
     let g:clang_format_exec = 'clang-format-3.9'
