@@ -148,6 +148,9 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="$PATH:/usr/local/android-studio/bin"
 
+# go install
+export GOROOT=$HOME/go
+export PATH=$PATH:$GOROOT/bin
 
 source /opt/ros/kinetic/setup.bash
 
