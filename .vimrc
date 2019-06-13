@@ -110,6 +110,15 @@ map <Leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_use_migemo = 1
 let g:EasyMotion_keys = 'asdfhjkl'
 
+""" go """
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+let g:go_metalinter_autosave = 1
+
+""" 括弧に色つけるやつ """
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
+
 call plug#end()
 
 """""""""""""""""""""""""""
@@ -191,7 +200,8 @@ set formatoptions=q
 set synmaxcol=200
 " clipboard
 " "+yと打つとclipboardにヤンク内容が入る
-set clipboard=unnamed,autoselect
+" nvim では使用できない
+" set clipboard=unnamed,autoselect
 
 """"""""""""""""""""""""""""""
 """ map関連
